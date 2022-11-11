@@ -1,6 +1,6 @@
-const Hapi = require('hapi')
+import Hapi from 'hapi'
 
-const init = async () => {
+export const init = async () => {
   
   // hapi js server initialization
   const server = Hapi.server({
@@ -8,8 +8,7 @@ const init = async () => {
     host: '0.0.0.0'
   })
 
-  await server.start()
-  console.log('server is running on port : ', server.info.uri)
-}
+  await server.initialize()
 
-init();
+  return { server }
+}
