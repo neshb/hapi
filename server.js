@@ -1,7 +1,7 @@
 const Hapi = require('hapi');
 const server = new Hapi.Server({port: 7000, host: '127.0.0.1'});
 
-// All routes
+// GET route 
 server.route({                                          
     method: 'GET',                                        
     path: '/',                                           
