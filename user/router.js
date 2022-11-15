@@ -1,4 +1,4 @@
-import { signUpSchema } from './types.js'
+import { signUpSchema, loginSchema } from './types.js'
 
 
 
@@ -9,7 +9,7 @@ export default function (server, userHandler) {
         path: '/user/signup',
         options: {
             validate: {
-                // payload: signUpSchema,
+                payload: signUpSchema,
             },
             handler: async (request, h) => {
                 // get payload and check sign up details
@@ -17,10 +17,30 @@ export default function (server, userHandler) {
                 // send payload to signUpUser handler for dp operation
                 const response = await userHandler.signUpUser(signUpDetails);
     
-                return h.response(signUpDetails)
+                return h.response(response)
             },
             description: 'user',
             notes: 'sign up',
+        }
+    });
+
+    // login user router
+    server.route({
+        method: 'POST',
+        path: '/user/login',
+        options: {
+            validate : {
+                payload: loginSchema,
+            },
+            handler: async (request, h) => {
+                // get login payload
+                const loginDetails = request.payload;
+
+                const response = await userHandler.loginUser(loginDetails);
+
+                return h.response(response)
+
+            }
         }
     })
 }

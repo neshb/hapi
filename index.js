@@ -4,11 +4,13 @@ import * as Server from './server.js'
 // Catch unhandled unexpected exceptions
 process.on('uncaughtException', (error) => {
     console.error(`uncaughtException ${error.message}`);
+    process.exit(1);
 });
 
 // Catch unhandled rejected promises
 process.on('unhandledRejection', (reason) => {
     console.error(`unhandledRejection ${reason}`);
+    process.exit(1);
 });
 
 

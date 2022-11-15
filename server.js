@@ -1,4 +1,4 @@
-import Hapi from 'hapi'
+import Hapi from '@hapi/hapi'
 
 import UserRouter from './user/router.js'
 import userHandler from './user/handler.js'
@@ -16,6 +16,11 @@ export const init = async () => {
   const userHandlerObj = userHandler();
   // user routers
   UserRouter(server, userHandlerObj)
+
+  server.ext('onRequest', (request, h) => {
+    console.log('request', request.payload)
+    return h.continue
+  })
 
   await server.initialize()
 

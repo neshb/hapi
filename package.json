@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/naresh-barfa-au19/hapi_practice#readme",
   "dependencies": {
-    "hapi": "^18.1.0",
+    "@hapi/hapi": "^21.0.0",
     "joi": "^17.7.0",
     "nodemon": "^2.0.20",
     "path": "^0.12.7"
