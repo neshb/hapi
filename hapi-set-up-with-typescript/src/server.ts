@@ -1,6 +1,8 @@
 import Hapi from '@hapi/hapi';
 import Path from 'path';
 
+import UserRouter from './user/router';
+import userHandler from './user/handler';
 
 
 export const init = async (config) => {
@@ -19,6 +21,20 @@ export const init = async (config) => {
     server.ext('onRequest', (request, h) => {
         console.log('request', request.url.href, request.payload)
         return h.continue
+    })
+
+    // handler set up
+    const userHandlerObj = userHandler()
+    // router set up
+    UserRouter(server, userHandlerObj)
+
+    // Page not found
+    server.route({
+        method: '*',
+        path: '/{any*}',
+        handler:async (request, h) => {
+            return h.response('Page not found')
+        }
     })
 
     // server initialization
